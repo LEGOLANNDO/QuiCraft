@@ -1,0 +1,139 @@
+﻿<Window x:Class="MinecraftServerGeneratorWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MinecraftServerGeneratorWpf"
+        mc:Ignorable="d"
+        Title="くいっくらふと" Height="850" Width="550"
+        Icon="QuiCraft.ico">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="10">
+
+            <GroupBox Header="基本設定" Padding="10" Margin="0,0,0,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="プロジェクト名 [必須]:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtProjectName" Grid.Row="0" Grid.Column="1" Margin="0,5"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="サーバーバージョン [必須]:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <ComboBox x:Name="CmbVersions" Grid.Row="1" Grid.Column="1" Margin="0,5" IsReadOnly="True"/>
+
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="最小メモリ(GB) [必須]:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtMinMem" Grid.Row="2" Grid.Column="1" Text="2" Margin="0,5"/>
+
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="最大メモリ(GB) [必須]:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtMaxMem" Grid.Row="3" Grid.Column="1" Text="4" Margin="0,5"/>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="任意設定" Padding="10" Margin="0,0,0,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="サーバーアイコン (64x64):" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtIconPath" Grid.Row="0" Grid.Column="1" IsReadOnly="True" Margin="0,5"/>
+                    <Button Grid.Row="0" Grid.Column="2" Content="選択..." Width="60" Margin="5,5,0,5" Click="BtnSelectIcon_Click"/>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="既存ワールドフォルダ:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtWorldPath" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="0,5"/>
+                    <Button Grid.Row="1" Grid.Column="2" Content="選択..." Width="60" Margin="5,5,0,5" Click="BtnSelectWorld_Click"/>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="サーバープロパティ" Padding="10" Margin="0,0,0,10">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="ゲームモード:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <ComboBox x:Name="CmbGamemode" Grid.Row="0" Grid.Column="1" SelectedIndex="0" Margin="0,5">
+                        <ComboBoxItem Content="survival"/>
+                        <ComboBoxItem Content="creative"/>
+                        <ComboBoxItem Content="adventure"/>
+                        <ComboBoxItem Content="spectator"/>
+                    </ComboBox>
+
+                    <TextBlock Grid.Row="1" Text="難易度:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <ComboBox x:Name="CmbDifficulty" Grid.Row="1" Grid.Column="1" SelectedIndex="0" Margin="0,5">
+                        <ComboBoxItem Content="normal"/>
+                        <ComboBoxItem Content="easy"/>
+                        <ComboBoxItem Content="peaceful"/>
+                        <ComboBoxItem Content="hard"/>
+                    </ComboBox>
+
+                    <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,5">
+                        <CheckBox x:Name="ChkHardcore" Content="ハードコア" Margin="0,0,15,0"/>
+                        <CheckBox x:Name="ChkAllowFlight" Content="飛行許可" Margin="0,0,15,0"/>
+                        <CheckBox x:Name="ChkEnableCommandBlock" Content="コマンドブロック許可"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="3" Text="ワールドネーム:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtLevelName" Grid.Row="3" Grid.Column="1" Text="world" Margin="0,5"/>
+
+                    <TextBlock Grid.Row="4" Text="最大人数:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtMaxPlayers" Grid.Row="4" Grid.Column="1" Text="20" Margin="0,5"/>
+
+                    <TextBlock Grid.Row="5" Text="サーバーポート:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtServerPort" Grid.Row="5" Grid.Column="1" Text="25565" Margin="0,5"/>
+
+                    <TextBlock Grid.Row="6" Text="描画距離:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtViewDistance" Grid.Row="6" Grid.Column="1" Text="16" Margin="0,5"/>
+
+                    <TextBlock Grid.Row="7" Text="シード値:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtLevelSeed" Grid.Row="7" Grid.Column="1" Margin="0,5"/>
+
+                    <TextBlock Grid.Row="8" Text="MOTD:" VerticalAlignment="Center" Margin="0,5,10,5"/>
+                    <TextBox x:Name="TxtMotd" Grid.Row="8" Grid.Column="1" Text="A Minecraft Server" Margin="0,5"/>
+                </Grid>
+            </GroupBox>
+
+            <StackPanel Margin="0,10">
+                <CheckBox x:Name="ChkEula" Margin="0,0,0,10" HorizontalAlignment="Center">
+                    <TextBlock>
+                        <Hyperlink NavigateUri="https://www.minecraft.net/ja-jp/eula" RequestNavigate="Hyperlink_RequestNavigate">
+                            Minecraft EULA
+                        </Hyperlink>
+                        に同意しますか？
+                    </TextBlock>
+                </CheckBox>
+
+                <ProgressBar x:Name="ProgressBarStatus" Height="20" Minimum="0" Maximum="100"/>
+                <TextBlock x:Name="LblStatus" Text="待機中" HorizontalAlignment="Center" Margin="0,5"/>
+                <Button x:Name="BtnRun" Content="実行" Height="40" Click="BtnRun_Click"/>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+</Window>
